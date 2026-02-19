@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Happy 16th Windaaa 💜</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+  text-align:center;
+  font-family: Arial;
+  background: linear-gradient(to right, #d5b6ff, #f3e8ff);
+  color:#5a3e85;
+  margin: 0;
+  padding: 10px;
+}
+
+.box {
+  background: rgba(255,255,255,0.6);
+  padding:20px;
+  border-radius:20px;
+  width:85%;
+  max-width: 600px;
+  margin:auto;
+  margin-top:20px;
+  box-shadow:0 5px 15px rgba(150, 111, 214, 0.5);
+}
+
+button {
+  padding:10px 20px;
+  margin:10px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  background:#b57edc;
+  color:white;
+  font-weight:bold;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #9d5dc9;
+}
+
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+#letter {
+  display:none;
+  background:white;
+  color:#5a3e85;
+  padding:20px;
+  border-radius:15px;
+  margin-top:15px;
+  line-height: 1.6;
+}
+
+#giftGame {
+  font-size:45px;
+  cursor:pointer;
+  display: inline-block;
+  transition: transform 0.1s;
+}
+
+#giftGame:active {
+  transform: scale(0.95);
+}
+
+#giftGame.completed {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+h1 {
+  margin-top:40px;
+  font-size:38px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  margin: 0 0 15px 0;
+}
+
+.close-btn {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #5a3e85;
+  padding: 0;
+  margin: 0;
+}
+
+.close-btn:hover {
+  background: none;
+  color: #b57edc;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 28px;
+  }
+  
+  #giftGame {
+    font-size: 35px;
+  }
+  
+  .box {
+    width: 90%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<h1>💜 HAPPY 16th BIRTHDAY WINDAAA 💜</h1>
+
+<div class="box">
+<h2>⏳ Hitung Mundur</h2>
+<p id="countdown"></p>
+</div>
+
+<div class="box">
+<h2>🎮 Game Klik Kado</h2>
+<p>Klik kado sampai dapat kejutan buat Windaaa 😜</p>
+<div id="giftGame">🎁</div>
+<p id="gameText"></p>
+</div>
+
+<div class="box">
+<h2>💌 Surat Untuk Windaaa</h2>
+<button onclick="openLetter()">Buka Surat 💖</button>
+
+<div id="letter">
+<button class="close-btn" onclick="closeLetter()">✕</button>
+<br><br>
+Selamat ulang tahun yang ke-16, Windaaa 💜<br><br>
+
+Aku tau kamu sering merasa harus kuat,
+harus berhasil, dan nggak boleh gagal.
+Padahal kamu juga manusia yang boleh capek.<br><br>
+
+Kalau suatu hari rasanya berat,
+semoga kamu ingat masih ada hal-hal baik
+yang selalu berpihak sama kamu.<br><br>
+
+Dan terima kasih,
+karena kamu pernah jadi bagian
+yang ngisi hari-hari aku.
+Itu nggak pernah biasa buat aku. 💫<br><br>
+
+Sweet sixteen.
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+// TANGGAL ULTAH WINDAAA
+var birthday = new Date("2026-02-21T00:00:00").getTime();
+var countdownTriggered = false;
+
+var x = setInterval(function() {
+  var now = new Date().getTime();
+  var distance = birthday - now;
+
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+  if (distance > 0) {
+    document.getElementById("countdown").innerHTML =
+    days + " hari lagi menuju 16 tahun 💜✨";
+  } else {
+    if (!countdownTriggered) {
+      document.getElementById("countdown").innerHTML =
+      "HARI INI WINDAAA ULTAH 🎉💜";
+      confetti();
+      countdownTriggered = true;
+    }
+  }
+}, 1000);
+
+// GAME
+var klik = 0;
+document.getElementById("giftGame").onclick = function() {
+  if (this.classList.contains("completed")) return;
+  
+  klik++;
+  if (klik < 6) {
+    document.getElementById("gameText").innerHTML =
+    "Belum dapet 😜 klik lagi! (" + klik + "/6)";
+  } else {
+    document.getElementById("gameText").innerHTML =
+    "YEEE dapet kebahagiaan + nilai bagus 🎉💜";
+    this.classList.add("completed");
+    confetti();
+  }
+};
+
+// SURAT
+function openLetter(){
+  document.getElementById("letter").style.display = "block";
+  confetti();
+}
+
+function closeLetter(){
+  document.getElementById("letter").style.display = "none";
+}
+</script>
+
+</body>
+  </html>
