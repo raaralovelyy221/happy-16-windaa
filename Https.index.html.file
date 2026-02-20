@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Happy 16th Windaaa 💜</title>
+<style>
+body {
+  margin:0;
+  padding:0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(120deg, #d5b6ff, #f3e8ff);
+  text-align:center;
+  overflow-x:hidden;
+  color:#5a3e85;
+  position:relative;
+}
+
+h1 { margin-top:40px; font-size:40px; }
+
+.box {
+  background: rgba(255,255,255,0.6);
+  padding:25px;
+  border-radius:25px;
+  width:85%;
+  margin:auto;
+  margin-top:25px;
+  box-shadow:0 5px 15px rgba(150,111,214,0.4);
+}
+
+button {
+  padding:12px 22px;
+  margin:12px;
+  border:none;
+  border-radius:14px;
+  cursor:pointer;
+  background:#b57edc;
+  color:white;
+  font-weight:bold;
+  font-size:16px;
+  transition: transform 0.2s;
+}
+
+button:hover { transform: scale(1.1); }
+
+#letter {
+  display:none;
+  background:white;
+  color:#5a3e85;
+  padding:20px;
+  border-radius:15px;
+  margin-top:15px;
+  text-align:left;
+  line-height:1.5;
+}
+
+#cake {
+  font-size:70px;
+  cursor:pointer;
+  display:none;
+  margin:20px auto;
+  transition: transform 0.2s;
+}
+
+#cake:hover { transform: scale(1.2) rotate(-10deg); }
+
+.glitter, .heart {
+  position:absolute;
+  width:15px;
+  height:15px;
+  pointer-events:none;
+  animation: move 5s linear infinite;
+}
+
+.glitter {
+  border-radius:50%;
+  background:yellow;
+}
+
+.heart {
+  width:20px;
+  height:20px;
+  background:red;
+  clip-path: polygon(50% 0%, 61% 10%, 70% 20%, 80% 30%, 90% 40%, 100% 50%, 90% 60%, 80% 70%, 70% 80%, 61% 90%, 50% 100%, 39% 90%, 30% 80%, 20% 70%, 10% 60%, 0% 50%, 10% 40%, 20% 30%, 30% 20%, 39% 10%);
+}
+
+@keyframes move {
+  0% { transform: translateY(-50px) scale(0.5); opacity:1;}
+  100% { transform: translateY(100vh) scale(1); opacity:0;}
+}
+
+/* Popup Giveaway */
+#popup {
+  display:none;
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:white;
+  padding:30px;
+  border-radius:25px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.4);
+  z-index:1000;
+  text-align:center;
+}
+
+#popup img {
+  width:250px;
+  border-radius:20px;
+}
+
+#overlay {
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.4);
+  z-index:999;
+}
+</style>
+</head>
+<body>
+
+<h1>💜 Happy 16th Birthday, Windaaa 💜</h1>
+
+<div class="box">
+<h2>⏳ Hitung Mundur</h2>
+<p id="countdown"></p>
+</div>
+
+<div class="box">
+<h2>🎂 Kue Ulang Tahun</h2>
+<p id="cakeText">Tunggu sampai ulang tahunnya tiba… 🎉</p>
+<div id="cake">🧁</div>
+</div>
+
+<div class="box">
+<h2>💌 Surat Untuk Windaaa</h2>
+<div id="letter">
+Selamat ulang tahun yang ke-16, Windaaa 💜<br><br>
+
+Aku tau kamu sering merasa harus kuat dan selalu berusaha maksimal.
+Padahal nggak apa-apa kalau capek atau nggak sempurna.<br><br>
+
+Semoga tahun ini lebih ringan dan lebih bahagia,<br>
+dan terima kasih karena kamu pernah jadi bagian
+yang ngisi hari-hari aku. Itu berarti banyak. 💫<br><br>
+
+Sweet sixteen.
+</div>
+</div>
+
+<!-- Popup Giveaway -->
+<div id="overlay"></div>
+<div id="popup">
+<h2>🎉 Surprise Giveaway! 🎉</h2>
+<p>Untuk Windaaa, kucing lucu ini buatmu 💜</p>
+<img src="https://cataas.com/cat/says/Happy%20Birthday!&size=50&color=purple" alt="Kucing Lucu">
+<br><br>
+<button onclick="closePopup()">Tutup</button>
+</div>
+
+<audio id="birthdaySong" src="https://www.soundjay.com/human/happy-birthday-01.mp3"></audio>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+// Countdown sampai jam 00:00 tanggal 21 Feb 2026
+var birthday = new Date("Feb 21, 2026 00:00:00").getTime();
+var countdown = setInterval(function(){
+  var now = new Date().getTime();
+  var distance = birthday - now;
+
+  if(distance>0){
+    var days = Math.floor(distance / (1000*60*60*24));
+    var hours = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
+    var minutes = Math.floor((distance % (1000*60*60))/(1000*60));
+    var seconds = Math.floor((distance % (1000*60))/1000);
+
+    document.getElementById("countdown").innerHTML = 
+      days + "d " + hours + "h " + minutes + "m " + seconds + "s lagi menuju ulang tahun 🎉";
+  } else {
+    document.getElementById("countdown").innerHTML = "HARI INI WINDAAA ULTAH 🎉💜";
+    clearInterval(countdown);
+    startCelebration();
+  }
+},1000);
+
+// Fungsi mulai perayaan
+var cakeClicked = false;
+function startCelebration(){
+  confetti();
+  createGlitter(50);
+  showCake();
+  showLetter();
+  startLoveRain();
+}
+
+// Show cake
+function showCake(){
+  document.getElementById("cake").style.display = "block";
+  document.getElementById("cakeText").innerHTML = "Klik kue untuk tiup lilin 🎂✨";
+}
+
+// Show letter otomatis
+var letterShown = false;
+function showLetter(){
+  if(!letterShown){
+    document.getElementById("letter").style.display="block";
+    letterShown = true;
+  }
+}
+
+// Cake click
+document.getElementById("cake").onclick=function(){
+  var audio=document.getElementById("birthdaySong");
+  audio.currentTime=0;
+  audio.play();
+  confetti();
+  createGlitter(30);
+  cakeClicked = true;
+  checkGiveaway();
+}
+
+// Check giveaway
+function checkGiveaway(){
+  if(cakeClicked){
+    showPopup();
+  }
+}
+
+// Popup
+function showPopup(){
+  document.getElementById("overlay").style.display="block";
+  document.getElementById("popup").style.display="block";
+}
+function closePopup(){
+  document.getElementById("overlay").style.display="none";
+  document.getElementById("popup").style.display="none";
+}
+
+// Glitter
+function createGlitter(count){
+  for(let i=0;i<count;i++){
+    let g = document.createElement("div");
+    g.classList.add("glitter");
+    g.style.left = Math.random()*window.innerWidth + "px";
+    g.style.background = `hsl(${Math.random()*360}, 100%, 80%)`;
+    g.style.animationDuration = 0.5 + Math.random()*1 + "s";
+    document.body.appendChild(g);
+    setTimeout(()=>g.remove(),1000);
+  }
+}
+
+// Hujan Love
+function startLoveRain(){
+  setInterval(()=>{
+    let heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.style.left = Math.random()*window.innerWidth + "px";
+    heart.style.animationDuration = 3 + Math.random()*2 + "s";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),5000);
+  },300);
+}
+</script>
+</body>
+</html>
