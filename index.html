@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Happy 16th Windaaa 💜</title>
+<style>
+body {
+  text-align:center;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #d5b6ff, #f3e8ff);
+  color:#5a3e85;
+  overflow-x:hidden;
+}
+
+h1 { margin-top:40px; font-size:38px; }
+
+.box {
+  background: rgba(255,255,255,0.6);
+  padding:20px;
+  border-radius:20px;
+  width:85%;
+  margin:auto;
+  margin-top:20px;
+  box-shadow:0 5px 15px rgba(150, 111, 214, 0.5);
+}
+
+button {
+  padding:10px 20px;
+  margin:10px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  background:#b57edc;
+  color:white;
+  font-weight:bold;
+  font-size:16px;
+}
+
+#letter {
+  display:none;
+  background:white;
+  color:#5a3e85;
+  padding:20px;
+  border-radius:15px;
+  margin-top:15px;
+}
+
+#giftGame, #cake {
+  font-size:50px;
+  cursor:pointer;
+  display:inline-block;
+  margin:10px;
+  transition: transform 0.2s;
+}
+
+#cake:hover, #giftGame:hover {
+  transform: scale(1.2);
+}
+
+.glitter {
+  position:absolute;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:yellow;
+  opacity:0.8;
+  pointer-events:none;
+  animation: glitterMove 1s linear infinite;
+}
+
+@keyframes glitterMove {
+  0% { transform: translateY(0) scale(0.5); opacity:1; }
+  100% { transform: translateY(300px) scale(1); opacity:0; }
+}
+</style>
+</head>
+
+<body>
+
+<h1>💜 HAPPY 16th BIRTHDAY WINDAAA 💜</h1>
+
+<div class="box">
+<h2>⏳ Hitung Mundur</h2>
+<p id="countdown"></p>
+</div>
+
+<div class="box">
+<h2>🎮 Game Klik Kado</h2>
+<p>Klik kado sampai dapat kejutan buat Windaaa 😜</p>
+<div id="giftGame">🎁</div>
+<p id="gameText"></p>
+</div>
+
+<div class="box">
+<h2>🎂 Klik Kue & Niupl Lilin</h2>
+<p>Klik kue untuk suara Happy Birthday 🎵✨</p>
+<div id="cake">🧁</div>
+</div>
+
+<div class="box">
+<h2>💌 Surat Untuk Windaaa</h2>
+<button onclick="openLetter()">Buka Surat 💖</button>
+<div id="letter">
+Selamat ulang tahun yang ke-16, Windaaa 💜<br><br>
+
+Aku tau kamu sering merasa harus kuat,
+harus berhasil, dan nggak boleh gagal.
+Padahal kamu juga manusia yang boleh capek.<br><br>
+
+Kalau suatu hari rasanya berat,
+semoga kamu ingat masih ada hal-hal baik
+yang selalu berpihak sama kamu.<br><br>
+
+Dan terima kasih,
+karena kamu pernah jadi bagian
+yang ngisi hari-hari aku.
+Itu nggak pernah biasa buatku. 💫<br><br>
+
+Sweet sixteen.
+</div>
+</div>
+
+<audio id="birthdaySong" src="https://www.soundjay.com/human/happy-birthday-01.mp3"></audio>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+// HITUNG MUNDUR WINDAAA
+var birthday = new Date("Feb 21, 2026 00:00:00").getTime();
+
+var x = setInterval(function() {
+  var now = new Date().getTime();
+  var distance = birthday - now;
+
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+  if (distance > 0) {
+    document.getElementById("countdown").innerHTML =
+    days + " hari lagi menuju ulang tahun 😆💜";
+  } else {
+    document.getElementById("countdown").innerHTML =
+    "HARI INI WINDAAA ULTAH 🎉💜";
+    confetti();
+    createGlitter(50);
+  }
+}, 1000);
+
+// GAME KADO
+var klik = 0;
+document.getElementById("giftGame").onclick = function() {
+  klik++;
+  if (klik < 6) {
+    document.getElementById("gameText").innerHTML =
+    "Belum dapet 😜 klik lagi!";
+  } else {
+    document.getElementById("gameText").innerHTML =
+    "YEEE dapet kebahagiaan 🎉💜";
+    confetti();
+  }
+};
+
+// SURAT
+function openLetter(){
+  document.getElementById("letter").style.display = "block";
+  confetti();
+}
+
+// KUE + NIPU LILIN + SOUND
+document.getElementById("cake").onclick = function() {
+  var audio = document.getElementById("birthdaySong");
+  audio.currentTime = 0;
+  audio.play();
+  confetti();
+  createGlitter(30);
+}
+
+// GLITTER FUN
+function createGlitter(count){
+  for(let i=0;i<count;i++){
+    let g = document.createElement("div");
+    g.classList.add("glitter");
+    g.style.left = Math.random()*window.innerWidth + "px";
+    g.style.background = `hsl(${Math.random()*360}, 100%, 80%)`;
+    g.style.animationDuration = 0.5 + Math.random()*1 + "s";
+    document.body.appendChild(g);
+    setTimeout(()=> g.remove(), 1000);
+  }
+}
+</script>
+
+</body>
+</html>
