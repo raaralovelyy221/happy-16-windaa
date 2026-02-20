@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Happy 16th Windaaa 💜</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #d5b6ff 0%, #f3e8ff 100%);
+  color: #5a3e85;
+  min-height: 100vh;
+  padding: 20px 10px;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin: 20px 0;
+  text-shadow: 2px 2px 4px rgba(90, 62, 133, 0.2);
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.box {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 25px;
+  border-radius: 20px;
+  margin: 20px 0;
+  box-shadow: 0 8px 25px rgba(150, 111, 214, 0.3);
+  backdrop-filter: blur(10px);
+  animation: slideUp 0.6s ease-out;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(150, 111, 214, 0.4);
+}
+
+button {
+  padding: 12px 25px;
+  margin: 10px 5px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #b57edc 0%, #d5a6e8 100%);
+  color: white;
+  font-weight: bold;
+  font-size: 1em;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(181, 126, 220, 0.3);
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(181, 126, 220, 0.5);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+input {
+  padding: 10px;
+  margin: 8px;
+  border: 2px solid #d5a6e8;
+  border-radius: 10px;
+  font-size: 1em;
+  text-align: center;
+}
+
+input:focus {
+  outline: none;
+  border-color: #b57edc;
+  box-shadow: 0 0 10px rgba(181, 126, 220, 0.3);
+}
+
+h2 {
+  color: #7c4ba3;
+  margin-bottom: 15px;
+  font-size: 1.8em;
+}
+
+p {
+  margin: 10px 0;
+  line-height: 1.6;
+  font-size: 1em;
+}
+
+/* ANIMATED HEART */
+#movingHeart {
+  position: fixed;
+  font-size: 40px;
+  cursor: pointer;
+  animation: floatHeart 8s ease-in-out infinite;
+  z-index: 999;
+  filter: drop-shadow(0 0 5px rgba(181, 126, 220, 0.5));
+  transition: transform 0.2s ease;
+}
+
+#movingHeart:hover {
+  transform: scale(1.2);
+}
+
+@keyframes floatHeart {
+  0% { top: 90%; left: 5%; }
+  25% { top: 20%; left: 80%; }
+  50% { top: 60%; left: 40%; }
+  75% { top: 10%; left: 70%; }
+  100% { top: 90%; left: 5%; }
+}
+
+/* GIFT GAME */
+#giftGame {
+  font-size: 60px;
+  cursor: pointer;
+  display: inline-block;
+  margin: 20px auto;
+  transition: transform 0.2s ease;
+}
+
+#giftGame:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+#giftGame:active {
+  transform: scale(0.95);
+}
+
+/* LETTER */
+#letter {
+  display: none;
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  margin-top: 15px;
+  line-height: 1.8;
+  font-size: 1.05em;
+  text-align: left;
+  max-height: 400px;
+  overflow-y: auto;
+  animation: slideIn 0.5s ease-out;
+}
+
+.close-btn {
+  float: right;
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #5a3e85;
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+  transition: transform 0.2s ease;
+}
+
+.close-btn:hover {
+  transform: scale(1.3);
+  box-shadow: none;
+}
+
+/* GAME AREA */
+#gameArea {
+  position: relative;
+  height: 350px;
+  background: linear-gradient(180deg, #f9f5ff 0%, #ebe0ff 100%);
+  border-radius: 15px;
+  overflow: hidden;
+  margin: 20px 0;
+  border: 2px solid #d5a6e8;
+}
+
+.game-heart {
+  position: absolute;
+  font-size: 35px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.1s ease;
+}
+
+game-heart:hover {
+  transform: scale(1.2);
+}
+
+/* QUIZ */
+#quizBox {
+  display: none;
+}
+
+.quiz-question {
+  margin: 20px 0;
+  padding: 15px;
+  background: rgba(213, 182, 255, 0.1);
+  border-radius: 10px;
+}
+
+/* ANIMATIONS */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.8em;
+  }
+  
+  .box {
+    padding: 15px;
+  }
+  
+  #gameArea {
+    height: 300px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<h1>💜 HAPPY 16th BIRTHDAY WINDAAA 💜</h1>
+
+<div id="movingHeart" onclick="startQuiz()">💖</div>
+
+<div class="container">
+
+  <!-- COUNTDOWN -->
+  <div class="box">
+    <h2>⏳ Hitung Mundur</h2>
+    <p id="countdown" style="font-size: 1.3em; color: #b57edc; font-weight: bold;"></p>
+  </div>
+
+  <!-- GAME KADO -->
+  <div class="box">
+    <h2>🎁 Game Klik Kado</h2>
+    <p>Klik sampai 6x buat dapet kejutan 😜</p>
+    <div id="giftGame">🎁</div>
+    <p id="gameText" style="color: #b57edc; font-weight: bold; min-height: 25px;"></p>
+  </div>
+
+  <!-- GAME LEVEL -->
+  <div class="box">
+    <h2>🎮 Tangkap Hati – Level Mode</h2>
+    <p>Level: <span id="level" style="color: #b57edc; font-weight: bold;">1</span> | 
+    Skor: <span id="score" style="color: #b57edc; font-weight: bold;">0</span> | 
+    Nyawa: <span id="lives" style="font-size: 1.2em;">❤️❤️❤️</span></p>
+    
+    <button onclick="startGame()">▶️ Mulai Game</button>
+    <button onclick="resetGame()" style="background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);">🔄 Reset</button>
+
+    <div id="gameArea"></div>
+
+    <p id="gameStatus" style="color: #7c4ba3; font-weight: bold; min-height: 25px;"></p>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="box" id="quizBox">
+    <h2>🧠 Mini Quiz</h2>
+    <p style="color: #7c4ba3; margin-bottom: 20px;">Jawab soal ini dengan benar untuk kejutan! ✨</p>
+
+    <div class="quiz-question">
+      <p><strong>1) 7 + 8 = ?</strong></p>
+      <input type="number" id="q1" placeholder="Jawaban">
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>2) 6 × 5 = ?</strong></p>
+      <input type="number" id="q2" placeholder="Jawaban">
+    </div>
+
+    <div class="quiz-question">
+      <p><strong>3) 9 + 6 = ?</strong></p>
+      <input type="number" id="q3" placeholder="Jawaban">
+    </div>
+
+    <button onclick="checkQuiz()">✅ Kirim Jawaban</button>
+    <p id="quizResult" style="color: #b57edc; font-weight: bold; min-height: 25px; margin-top: 15px;"></p>
+  </div>
+
+  <!-- SURAT -->
+  <div class="box">
+    <h2>💌 Surat Untuk Windaaa</h2>
+    <button onclick="openLetter()">📮 Buka Surat 💖</button>
+
+    <div id="letter">
+      <button class="close-btn" onclick="closeLetter()">✕</button>
+      <br><br>
+
+      <p><strong>Selamat ulang tahun yang ke-16, Windaaa 💜</strong></p><br>
+
+      <p>Aku tau kamu sering merasa harus kuat,
+      harus berhasil, dan nggak boleh gagal.
+      Padahal kamu juga manusia yang boleh capek.</p><br>
+
+      <p>Kalau suatu hari rasanya berat,
+      semoga kamu ingat masih ada hal-hal baik
+      yang selalu berpihak sama kamu.</p><br>
+
+      <p>Dan terima kasih,
+      karena kamu pernah jadi bagian
+      yang ngisi hari-hari aku.
+      Itu nggak pernah biasa buatku. 💫</p><br>
+
+      <p><strong>Sweet sixteen.</strong></p>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+/* ===== COUNTDOWN ===== */
+var birthday = new Date("2026-02-21T00:00:00").getTime();
+setInterval(function() {
+  var now = new Date().getTime();
+  var distance = birthday - now;
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  if (distance > 0) {
+    document.getElementById("countdown").innerHTML =
+      days + " hari " + hours + " jam " + minutes + " menit " + seconds + " detik lagi 💜";
+  } else {
+    document.getElementById("countdown").innerHTML =
+      "🎉 HARI INI WINDAAA ULTAH! 🎉";
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+  }
+}, 1000);
+
+/* ===== GAME KADO ===== */
+var klik = 0;
+document.getElementById("giftGame").onclick = function() {
+  klik++;
+  if (klik < 6) {
+    document.getElementById("gameText").innerHTML =
+      "Belum dapet 😜 (" + klik + "/6)";
+  } else {
+    document.getElementById("gameText").innerHTML =
+      "🎉 YEEE dapet kebahagiaan + rejeki + nilai bagus + semua yang kamu mau! 🎉";
+    confetti({
+      particleCount: 150,
+      spread: 100,
+      origin: { y: 0.5 }
+    });
+    klik = 0;
+  }
+};
+
+/* ===== QUIZ ===== */
+function startQuiz() {
+  document.getElementById("quizBox").style.display = "block";
+  document.querySelector("html").scrollTop = 0;
+  document.body.scrollTop = 0;
+}
+
+function checkQuiz() {
+  var a1 = parseInt(document.getElementById("q1").value);
+  var a2 = parseInt(document.getElementById("q2").value);
+  var a3 = parseInt(document.getElementById("q3").value);
+
+  if (a1 === 15 && a2 === 30 && a3 === 15) {
+    document.getElementById("quizResult").innerHTML =
+      "✅ BENAR SEMUA! Kamu adalah orang yang amazing! 🎉";
+    confetti({
+      particleCount: 200,
+      spread: 100,
+      origin: { y: 0.5 }
+    });
+  } else {
+    document.getElementById("quizResult").innerHTML =
+      "❌ Masih ada yang salah 😜 Coba lagi!";
+  }
+}
+
+/* ===== SURAT ===== */
+function openLetter() {
+  document.getElementById("letter").style.display = "block";
+  confetti({
+    particleCount: 80,
+    spread: 60,
+    origin: { y: 0.7 }
+  });
+}
+
+function closeLetter() {
+  document.getElementById("letter").style.display = "none";
+}
+
+/* ===== GAME LEVEL TANGKAP HATI ===== */
+var score = 0;
+var level = 1;
+var lives = 3;
+var spawnInterval;
+var fallSpeed = 3;
+var gameRunning = false;
+
+function startGame() {
+  if (gameRunning) return;
+  score = 0;
+  level = 1;
+  lives = 3;
+  fallSpeed = 3;
+  gameRunning = true;
+  updateUI();
+  document.getElementById("gameStatus").innerText = "🎮 Game dimulai! Tangkap hati ❤️";
+  document.getElementById("gameArea").innerHTML = "";
+  clearInterval(spawnInterval);
+  spawnInterval = setInterval(spawnHeart, 800 - (level * 50));
+}
+
+function resetGame() {
+  gameRunning = false;
+  clearInterval(spawnInterval);
+  document.getElementById("gameArea").innerHTML = "";
+  score = 0;
+  level = 1;
+  lives = 3;
+  fallSpeed = 3;
+  updateUI();
+  document.getElementById("gameStatus").innerText = "";
+}
+
+function spawnHeart() {
+  var heart = document.createElement("div");
+  heart.className = "game-heart";
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 90 + "%";
+  heart.style.top = "0px";
+
+  var fall = setInterval(function() {
+    if (!gameRunning) {
+      clearInterval(fall);
+      heart.remove();
+      return;
+    }
+    heart.style.top = heart.offsetTop + fallSpeed + "px";
+    if (heart.offsetTop > 320) {
+      clearInterval(fall);
+      heart.remove();
+      loseLife();
+    }
+  }, 30);
+
+  heart.onclick = function(e) {
+    e.stopPropagation();
+    if (!gameRunning) return;
+    score++;
+    heart.style.transform = "scale(0)";
+    setTimeout(() => heart.remove(), 200);
+    clearInterval(fall);
+    
+    if (score >= level * 10) {
+      level++;
+      fallSpeed += 0.5;
+      clearInterval(spawnInterval);
+      document.getElementById("gameStatus").innerText =
+        "🎉 LEVEL UP! Level " + level + " 🎉";
+      setTimeout(() => {
+        spawnInterval = setInterval(spawnHeart, Math.max(500, 800 - (level * 50)));
+      }, 1000);
+    }
+    updateUI();
+  };
+
+  document.getElementById("gameArea").appendChild(heart);
+}
+
+function loseLife() {
+  if (!gameRunning) return;
+  lives--;
+  updateUI();
+  if (lives <= 0) {
+    gameRunning = false;
+    clearInterval(spawnInterval);
+    document.getElementById("gameStatus").innerHTML =
+      "💔 GAME OVER! Skor Akhir: " + score + " | Level Tertinggi: " + level;
+  }
+}
+
+function updateUI() {
+  document.getElementById("score").innerText = score;
+  document.getElementById("level").innerText = level;
+
+  var heartText = "";
+  for (var i = 0; i < lives; i++) {
+    heartText += "❤️";
+  }
+  document.getElementById("lives").innerText = heartText;
+}
+</script>
+
+</body>
+  </html>
